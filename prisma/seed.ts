@@ -295,7 +295,13 @@ async function main() {
     }
   }
 
-  console.log(`Seeded super admin ${email}`);
+  const [users, servicesCount, postsCount, settingsCount] = await Promise.all([
+    prisma.user.count(),
+    prisma.service.count(),
+    prisma.post.count(),
+    prisma.siteSetting.count(),
+  ]);
+  console.log(`Seed ready. Admin ${email}. Users ${users}, services ${servicesCount}, posts ${postsCount}, settings ${settingsCount}.`);
 }
 
 main()

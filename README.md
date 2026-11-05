@@ -24,7 +24,7 @@ Change that password from the account page after the first sign-in.
 
 ## Neon
 
-Put the Neon connection string in `DATABASE_URL`. Use `sslmode=require`. Then run the same Prisma migrate and seed commands.
+Set `DATABASE_URL` to the pooled Neon URL and `DIRECT_URL` to the same URL without `-pooler`. Use `sslmode=require`. A deploy runs `prisma migrate deploy` and `prisma db seed` before the site builds, so the super admin, services, community posts and company details are created when they are missing. Set `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD` in the Vercel project. Do not commit those values.
 
 ## Card deposits
 
