@@ -1,4 +1,4 @@
-import type { BookingStatus, BookingType, InvoiceStatus } from "@prisma/client";
+import type { BookingStatus, BookingType, InvoiceStatus, PaymentStatus } from "@prisma/client";
 
 export const bookingTypeLabel: Record<BookingType, string> = {
   REMOVAL: "Removal",
@@ -18,6 +18,19 @@ export const bookingStatusLabel: Record<BookingStatus, string> = {
   COMPLETED: "Completed",
   CANCELLED: "Cancelled",
 };
+
+export const paymentStatusLabel: Record<PaymentStatus, string> = {
+  PENDING: "Pending",
+  SUCCEEDED: "Received",
+  FAILED: "Failed",
+  REFUNDED: "Refunded",
+};
+
+export function paymentTypeLabel(provider: string) {
+  if (provider === "stripe") return "Card";
+  if (provider === "bank") return "Bank transfer";
+  return "Office";
+}
 
 export const invoiceStatusLabel: Record<InvoiceStatus, string> = {
   DRAFT: "Draft",

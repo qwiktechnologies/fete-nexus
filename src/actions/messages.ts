@@ -54,6 +54,13 @@ export async function markConversationRead(conversationId: string) {
   });
 }
 
+export async function markInboxRead(formData: FormData) {
+  const id = field(formData, "conversationId");
+  await markConversationRead(id);
+  revalidatePath("/admin/messages");
+  revalidatePath(`/admin/messages/${id}`);
+}
+
 export async function startConversation(_prev: FormState, formData: FormData): Promise<FormState> {
   const user = await requireUser();
   if (isStaffRole(user.role)) return { error: "Reply from the admin inbox." };

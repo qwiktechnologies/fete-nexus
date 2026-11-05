@@ -27,7 +27,7 @@ export function SiteHeader({
 
   return (
     <header className="sticky top-0 z-40 border-b border-navy-900/10 bg-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
+      <div className="flex w-full items-center justify-between gap-4 px-5 py-3 sm:px-8 lg:px-12">
         <Link href="/" aria-label="Fete Nexus home">
           <Wordmark />
         </Link>

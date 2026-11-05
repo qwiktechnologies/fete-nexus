@@ -186,6 +186,29 @@ export async function saveService(_prev: FormState, formData: FormData): Promise
   redirect("/admin/services");
 }
 
+export async function setServiceActive(formData: FormData) {
+  await requireAdmin();
+  const id = field(formData, "id");
+  const active = field(formData, "active") === "true";
+  await prisma.service.update({ where: { id }, data: { active } });
+  revalidatePath("/services");
+  revalidatePath("/");
+  revalidatePath("/admin/services");
+}
+
+export async function setPostPublished(formData: FormData) {
+  await requireAdmin();
+  const id = field(formData, "id");
+  const published = field(formData, "published") === "true";
+  await prisma.post.update({
+    where: { id },
+    data: { published, publishedAt: published ? new Date() : null },
+  });
+  revalidatePath("/community");
+  revalidatePath("/");
+  revalidatePath("/admin/blog");
+}
+
 export async function savePost(_prev: FormState, formData: FormData): Promise<FormState> {
   const admin = await requireAdmin();
   const id = field(formData, "id");
