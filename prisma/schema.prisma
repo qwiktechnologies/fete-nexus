@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum BookingType {
+  REMOVAL
+  COLLECTION
+  HOUSE_MOVE
+  DELIVERY
+  SERVICE
+}
+
+enum BookingStatus {
+  PENDING
+  QUOTED
+  ACCEPTED
+  REJECTED
+  AWAITING_PAYMENT
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  VOID
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  phone        String?
+  passwordHash String
+  role         Role     @default(CUSTOMER)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bookings      Booking[]
+  quotes        Quote[]        @relation("QuoteAuthor")
+  invoices      Invoice[]      @relation("InvoiceAuthor")
+  payments      Payment[]
+  posts         Post[]
+  sentMessages  Message[]
+  conversations Conversation[]
+}
+
+model Service {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  summary        String
+  description    String   @db.Text
+  includes       String   @db.Text
+  category       String
+  pricePence     Int?
+  depositPercent Int?
+  isPurchasable  Boolean  @default(false)
+  featured       Boolean  @default(false)
+  icon           String   @default("package")
+  active         Boolean  @default(true)
+  sortOrder      Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  bookings       Booking[]
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  reference     String        @unique
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  serviceId     String?
+  service       Service?      @relation(fields: [serviceId], references: [id])
+  type          BookingType
+  status        BookingStatus @default(PENDING)
+  scheduledDate DateTime
+  scheduledTime String
+  locationFrom  String
+  locationTo    String
+  distanceNote  String        @default("")
+  instructions  String        @default("") @db.Text
+  adminNote     String        @default("") @db.Text
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  images        BookingImage[]
+  quotes        Quote[]
+  invoices      Invoice[]
+  conversation  Conversation?
+
+  @@index([status])
+  @@index([userId])
+}
+
+model BookingImage {
+  id        String   @id @default(cuid())
+  bookingId String
+  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  url       String
+  createdAt DateTime @default(now())
+}
+
+model Quote {
+  id          String   @id @default(cuid())
+  bookingId   String
+  booking     Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  amountPence Int
+  message     String   @db.Text
+  createdById String
+  createdBy   User     @relation("QuoteAuthor", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Invoice {
+  id           String        @id @default(cuid())
+  number       String        @unique
+  bookingId    String
+  booking      Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  amountPence  Int
+  depositPence Int
+  notes        String        @default("") @db.Text
+  status       InvoiceStatus @default(SENT)
+  createdById  String
+  createdBy    User          @relation("InvoiceAuthor", fields: [createdById], references: [id])
+  createdAt    DateTime      @default(now())
+  payments     Payment[]
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice       @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  amountPence Int
+  status      PaymentStatus @default(PENDING)
+  provider    String
+  providerRef String?
+  createdAt   DateTime      @default(now())
+
+  @@index([invoiceId])
+  @@index([status])
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  excerpt     String
+  content     String    @db.Text
+  published   Boolean   @default(false)
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([published, publishedAt])
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  bookingId String?   @unique
+  booking   Booking?  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  subject   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+
+  @@index([userId])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String?
+  sender         User?        @relation(fields: [senderId], references: [id])
+  body           String       @db.Text
+  system         Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  readAt         DateTime?
+
+  @@index([conversationId])
+}
+
+model SiteSetting {
+  id                String   @id @default("default")
+  companyName       String
+  heroLine          String
+  tagline           String
+  email             String
+  phone             String
+  address           String
+  areas             String
+  directorName      String
+  licenceNumber     String
+  insuredNote       String
+  about             String   @db.Text
+  hours             String
+  depositPercent    Int      @default(30)
+  bankAccountName   String   @default("")
+  bankSortCode      String   @default("")
+  bankAccountNumber String   @default("")
+  updatedAt         DateTime @updatedAt
+}
+
+model PaymentConfig {
+  id                   String   @id @default("default")
+  stripeSecretKey      String   @default("")
+  stripePublishableKey String   @default("")
+  stripeWebhookSecret  String   @default("")
+  updatedAt            DateTime @updatedAt
+}

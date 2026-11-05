@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: fete
+      POSTGRES_PASSWORD: fete
+      POSTGRES_DB: fetenexus
+    ports:
+      - "5544:5432"
+    volumes:
+      - fete_nexus_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fete -d fetenexus"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  fete_nexus_pg:

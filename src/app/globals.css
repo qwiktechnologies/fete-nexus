@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #071422;
+  --color-navy-900: #0b1f3a;
+  --color-navy-800: #123056;
+  --color-navy-700: #1b406f;
+  --color-navy-100: #e7eef6;
+  --color-gold-600: #c48e0c;
+  --color-gold-500: #e6a817;
+  --color-gold-400: #f0be3a;
+  --color-gold-100: #fbf3dc;
+  --color-paper: #f6f3ec;
+  --color-ink: #142033;
+  --color-muted: #5c6b7a;
+  --font-sans: var(--font-source), "Segoe UI", sans-serif;
+  --font-display: var(--font-outfit), Georgia, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-source), "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-outfit), Georgia, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+::selection {
+  background: #f0be3a;
+  color: #0b1f3a;
+}
+
+:focus-visible {
+  outline: 2px solid #e6a817;
+  outline-offset: 3px;
+}
+
+.field {
+  margin-top: 0.45rem;
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid rgb(11 31 58 / 12%);
+  background: white;
+  padding: 0.8rem 0.95rem;
+  color: var(--color-ink);
+  font: inherit;
+}
+
+.field:focus {
+  border-color: var(--color-gold-500);
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(230 168 23 / 18%);
+}
+
+.label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+}
