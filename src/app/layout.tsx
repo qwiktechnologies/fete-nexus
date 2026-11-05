@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   },
   description:
     "Your logistics partner for removals, clearance, delivery and collections across Bradford, Leeds and West Yorkshire.",
+  icons: {
+    icon: [{ url: "/brand/logo.jpg", type: "image/jpeg" }],
+    apple: [{ url: "/brand/logo.jpg", type: "image/jpeg" }],
+    shortcut: ["/brand/logo.jpg"],
+  },
 };
 
 export const viewport: Viewport = {
