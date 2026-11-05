@@ -144,7 +144,7 @@ export function BookingForm({
         <h2 className="mt-3 text-3xl">{mode === "service" ? selected?.title : "Custom job"}</h2>
         {mode === "service" && selected?.isPurchasable && selected.pricePence != null ? (
           <p className="mt-4 text-white/80">
-            Listed price {gbp(selected.pricePence)}. Deposit due to confirm: {deposit != null ? gbp(deposit) : "set on the invoice"}.
+            Listed price {gbp(selected.pricePence)}. After you submit, the invoice is ready and Pay now takes the {deposit != null ? gbp(deposit) : "deposit"} on Stripe.
           </p>
         ) : (
           <p className="mt-4 text-white/80">We&apos;ll send a quote in your account. You pay the deposit on the invoice, and that confirms the booking.</p>

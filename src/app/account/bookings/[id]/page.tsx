@@ -10,7 +10,7 @@ export default async function AccountBookingPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ session_id?: string }>;
+  searchParams: Promise<{ session_id?: string; invoice?: string; pay?: string }>;
 }) {
   const [{ id }, query, user] = await Promise.all([params, searchParams, requireUser()]);
   if (query.session_id) await confirmStripeReturn(query.session_id, user.id);
@@ -20,12 +20,15 @@ export default async function AccountBookingPage({
     cardPaymentsEnabled(),
   ]);
   if (!booking || booking.userId !== user.id) notFound();
+  const paid = booking.invoices.some((invoice) => invoice.status === "PAID");
+  const notice = query.session_id && paid ? "paid" : query.pay === "cancelled" ? "cancelled" : query.invoice === "1" ? "invoice" : undefined;
   return (
     <BookingView
       booking={booking}
       mode="customer"
       viewerId={user.id}
       cardPayments={cardPayments}
+      notice={notice}
       bank={{ accountName: settings.bankAccountName, sortCode: settings.bankSortCode, accountNumber: settings.bankAccountNumber }}
     />
   );
