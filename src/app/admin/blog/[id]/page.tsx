@@ -10,7 +10,7 @@ export default async function EditPostPage({ params }: { params: Promise<{ id: s
   if (!post) notFound();
   return (
     <div>
-      <h1 className="mb-6 text-4xl text-navy-900">Edit article</h1>
+      <h1 className="dash-title mb-6">Edit article</h1>
       <PostForm initial={post} />
     </div>
   );

@@ -19,7 +19,7 @@ export function AddAccountButton({ superAdmin }: { superAdmin: boolean }) {
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className="rounded-full bg-gold-500 px-5 py-2 font-bold text-navy-950">
+      <button type="button" onClick={() => setOpen(true)} className="btn-primary py-2">
         Add account
       </button>
       {open ? (
@@ -53,7 +53,7 @@ export function AddAccountButton({ superAdmin }: { superAdmin: boolean }) {
                 </select>
               </label>
             </div>
-            <button disabled={pending} className="mt-5 inline-flex min-h-11 items-center rounded-full bg-navy-900 px-5 font-bold text-white disabled:opacity-60">
+            <button disabled={pending} className="mt-5 btn-secondary disabled:opacity-60">
               {pending ? "Saving…" : "Create account"}
             </button>
           </form>

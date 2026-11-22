@@ -26,7 +26,7 @@ export default async function AdminMessagesPage() {
 
   return (
     <div className="w-full">
-      <h1 className="text-4xl text-navy-900">Messages</h1>
+      <h1 className="dash-title">Messages</h1>
       <p className="mt-2 text-muted">Customer threads. Mark one as read when you have seen it.</p>
       {conversations.length ? (
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -48,7 +48,7 @@ export default async function AdminMessagesPage() {
                 </p>
                 <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-navy-800">{preview}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link href={`/admin/messages/${conversation.id}`} className="inline-flex min-h-10 items-center rounded-full bg-navy-900 px-4 text-sm font-bold text-white">
+                  <Link href={`/admin/messages/${conversation.id}`} className="btn-secondary min-h-10 px-4 text-sm">
                     Open
                   </Link>
                   {unread ? (

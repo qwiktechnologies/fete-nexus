@@ -16,10 +16,10 @@ export default async function ServicesAdminPage() {
     <div className="w-full">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl text-navy-900">Services</h1>
+          <h1 className="dash-title">Services</h1>
           <p className="mt-2 text-muted">Listed work, prices and what customers can book.</p>
         </div>
-        <Link href="/admin/services/new" className="rounded-full bg-gold-500 px-5 py-2 font-bold text-navy-950">New service</Link>
+        <Link href="/admin/services/new" className="btn-primary py-2">New service</Link>
       </div>
       <DataTable columns={columns} empty={!services.length}>
         {services.map((service) => (

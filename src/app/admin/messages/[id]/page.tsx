@@ -18,7 +18,7 @@ export default async function AdminThreadPage({ params }: { params: Promise<{ id
   return (
     <div className="grid gap-4">
       <Link href="/admin/messages" className="text-sm font-bold text-gold-600">All messages</Link>
-      <h1 className="text-4xl text-navy-900">{conversation.subject}</h1>
+      <h1 className="dash-title">{conversation.subject}</h1>
       <p className="text-muted">{conversation.user.name} · {conversation.user.email}</p>
       {conversation.bookingId ? <Link href={`/admin/bookings/${conversation.bookingId}`} className="font-bold text-navy-900">Open booking</Link> : null}
       <MessageThread

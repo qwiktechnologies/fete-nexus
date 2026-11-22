@@ -35,7 +35,7 @@ export function MessageThread({
   }, [state]);
 
   return (
-    <section className="rounded-[2rem] bg-white p-5">
+    <section className="panel p-5">
       <h2 className="text-2xl text-navy-900">Messages</h2>
       <div className="mt-4 grid max-h-[32rem] gap-3 overflow-y-auto pr-1">
         {messages.map((message) => {

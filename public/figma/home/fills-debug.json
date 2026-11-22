@@ -1,0 +1,75 @@
+{
+  "mapKeys": 0,
+  "fills": [
+    {
+      "nodeId": "10:800",
+      "name": "Header Image",
+      "imageRef": "1b0eeb400c17d29f9ed6f0cf75269fb10cb89e40"
+    },
+    {
+      "nodeId": "26:169",
+      "name": "AB6AXuA7IbMlj2zeDnAYkmnhkxpYd5amY5QqD0e0t4NpBllT7T26wAPTISEZNqJy8JQLFBPcjiB9lRNaDdj4LfaMN8rVxZG5fIJ46iaNym8SoUvoIrNOACAl8ZsL4h4Q0_oehivP5_FsngKX2L4mZVdiDvBwKm7sUDLxmPgoWdrVN5VgVCRVS7FqZb5zY3tWlV58NNPwrxUANI4V457-AEaR6K5Y7v5yfkIXgFfnkhk85LiQ",
+      "imageRef": "c014af00f13854773f77c4f43e1a6f985012b592"
+    },
+    {
+      "nodeId": "26:187",
+      "name": "AB6AXuBhk_dNo9J-vSvEu7Q8zeH2mEGHvRIvBNBs0xDSbDen4BiXKUqtljGyYGv4YLC9ZvFnnn1Bh8BYe0txPLz3zUrMPT3Bj2-fb6AP4H0Sr3RNYQN3XSxFghNsTu_EmmllaBEESsy-G9MZTtQ_KiqC4FU7Vbcwr30vBCiQqPsfZdf41ixmuOsDGpC5UvHZPiQybGRhkBSckHrvLy5mpo_p424ZAKwuG4gMAXWcYjxQbWoC",
+      "imageRef": "0df45426e6843bd6a0d55112a9da21955d1249ab"
+    },
+    {
+      "nodeId": "81:34",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "139:120",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "145:355",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "145:372",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "53:48",
+      "name": "Fete Nexus fleet",
+      "imageRef": "0df45426e6843bd6a0d55112a9da21955d1249ab"
+    },
+    {
+      "nodeId": "53:87",
+      "name": "Careful handling by the removals team",
+      "imageRef": "c014af00f13854773f77c4f43e1a6f985012b592"
+    },
+    {
+      "nodeId": "139:185",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "145:389",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "139:250",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "145:423",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    },
+    {
+      "nodeId": "145:406",
+      "name": "FETE NEXUS Logo for web_page-0001 1",
+      "imageRef": "9e1b8580da4ac70a6fe10e42e2e0573a46d58b12"
+    }
+  ]
+}

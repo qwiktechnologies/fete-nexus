@@ -20,7 +20,7 @@ export default async function CommunityPage() {
         </Container>
       </section>
       <Container className="py-12">
-        <div className="divide-y divide-navy-900/10 border-y border-navy-900/10">
+        <div className="divide-y divide-border border-y border-navy-900/10">
           {posts.map((post) => (
             <article key={post.id} className="grid gap-3 py-8 md:grid-cols-[180px_1fr]">
               <p className="text-sm font-semibold text-gold-600">{post.publishedAt ? formatDate(post.publishedAt) : ""}</p>

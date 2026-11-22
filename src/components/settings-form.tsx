@@ -39,7 +39,7 @@ export function SettingsForm({ settings }: { settings: Settings }) {
     ["hours", "Hours"],
   ];
   return (
-    <form action={action} className="grid max-w-3xl gap-4 rounded-[2rem] bg-white p-6">
+    <form action={action} className="grid max-w-3xl gap-4 panel p-6">
       {state.error ? <p className="text-sm text-red-700">{state.error}</p> : null}
       {state.ok ? <p className="text-sm text-emerald-700">{state.ok}</p> : null}
       {fields.map(([name, label]) => (
@@ -51,7 +51,7 @@ export function SettingsForm({ settings }: { settings: Settings }) {
       <label className="label">Account name<input className="field" name="bankAccountName" defaultValue={settings.bankAccountName} /></label>
       <label className="label">Sort code<input className="field" name="bankSortCode" defaultValue={settings.bankSortCode} /></label>
       <label className="label">Account number<input className="field" name="bankAccountNumber" defaultValue={settings.bankAccountNumber} /></label>
-      <button disabled={pending} className="inline-flex min-h-11 items-center justify-center rounded-full bg-navy-900 px-5 font-bold text-white">Save details</button>
+      <button disabled={pending} className="btn-secondary">Save details</button>
     </form>
   );
 }

@@ -7,7 +7,7 @@ export default async function SettingsPage() {
   const settings = await getSettings();
   return (
     <div>
-      <h1 className="mb-6 text-4xl text-navy-900">Site details</h1>
+      <h1 className="mb-6 dash-title">Site details</h1>
       <SettingsForm settings={settings} />
     </div>
   );

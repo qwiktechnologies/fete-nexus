@@ -16,7 +16,7 @@ export default async function UsersPage() {
     <div className="w-full">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl text-navy-900">People</h1>
+          <h1 className="dash-title">People</h1>
           <p className="mt-2 text-muted">Customers, staff and admins. A disabled account cannot sign in.</p>
         </div>
         <AddAccountButton superAdmin={admin.role === "SUPER_ADMIN"} />

@@ -1,65 +1,152 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import { Container } from "@/components/container";
-import { initials } from "@/lib/format";
-import { getSettings } from "@/lib/queries";
+import { FigmaImage } from "@/components/figma-image";
+import { MarketingButton } from "@/components/marketing-button";
+import {
+  aboutBottomCta,
+  aboutCommitment,
+  aboutHero,
+  aboutImages,
+  aboutProcess,
+  aboutStory,
+  aboutValues,
+} from "@/lib/about-figma";
 
 export const metadata: Metadata = { title: "Who we are" };
 
-const promises = [
-  ["Show up", "The date on the invoice is the date the crew is booked for."],
-  ["Price it first", "You see the deposit before any money is taken."],
-  ["Carry waste properly", "Clearance jobs move under our waste carrier licence."],
-  ["Keep it in the app", "Quotes, invoices and questions stay on the booking."],
-];
-
-export default async function AboutPage() {
-  const settings = await getSettings();
+export default function AboutPage() {
   return (
     <>
-      <section className="bg-navy-900 py-16 text-white">
-        <Container>
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold-400">Who we are</p>
-          <h1 className="mt-3 max-w-3xl text-5xl">Your logistics partner in {settings.areas}</h1>
+      <section className="border-b border-border/70 bg-white py-12 lg:py-14">
+        <Container className="grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <p className="eyebrow text-gold-600">{aboutHero.eyebrow}</p>
+            <h1 className="mt-3 text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-navy-900 sm:text-[2.65rem]">
+              {aboutHero.title}
+            </h1>
+            <p className="mt-4 text-lg font-bold text-navy-800">{aboutHero.subtitle}</p>
+            <p className="mt-5 max-w-xl text-lg leading-8 text-muted">{aboutHero.body}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={aboutHero.primaryCta.href}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-transparent bg-gold-500 px-5 text-sm font-bold text-white shadow-[0_10px_24px_-12px_rgba(242,140,40,0.9)] hover:bg-gold-400"
+              >
+                {aboutHero.primaryCta.label}
+              </Link>
+              <MarketingButton href={aboutHero.secondaryCta.href} variant="secondary">
+                {aboutHero.secondaryCta.label}
+              </MarketingButton>
+            </div>
+          </div>
+          <div className="relative overflow-hidden rounded-2xl border border-border shadow-lg">
+            <FigmaImage
+              src={aboutImages.fleet}
+              alt="Fete Nexus fleet parked at the depot"
+              width={1200}
+              height={800}
+              className="aspect-[3/2] w-full object-cover"
+              priority
+            />
+            <p className="absolute bottom-0 left-0 right-0 bg-navy-900/95 px-4 py-3 text-center text-[11px] font-bold uppercase tracking-[0.1em] text-white">
+              {aboutHero.imageBadge}
+            </p>
+          </div>
         </Container>
       </section>
-      <Container className="grid gap-12 py-16 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          {settings.about.split(/\n\n+/).map((paragraph) => (
-            <p key={paragraph.slice(0, 32)} className="mt-5 text-lg leading-8 first:mt-0">{paragraph}</p>
-          ))}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {promises.map(([title, text]) => (
-              <article key={title} className="rounded-3xl bg-white p-5">
-                <h2 className="text-xl text-navy-900">{title}</h2>
-                <p className="mt-2 text-muted">{text}</p>
+
+      <section className="bg-surface-50 py-12 lg:py-14">
+        <Container className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+          <div>
+            <p className="eyebrow text-gold-600">{aboutStory.eyebrow}</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-navy-900 sm:text-[2rem]">{aboutStory.title}</h2>
+          </div>
+          <div className="space-y-5 text-lg leading-8 text-muted">
+            {aboutStory.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)} className="whitespace-pre-line">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-white py-12 lg:py-14">
+        <Container>
+          <p className="eyebrow text-gold-600">{aboutValues.eyebrow}</p>
+          <h2 className="mt-3 max-w-4xl text-3xl font-semibold leading-snug text-navy-900">{aboutValues.title}</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {aboutValues.cards.map((card) => (
+              <article key={card.number} className="panel border border-border/80 p-6 lg:p-7">
+                <p className="text-sm font-bold text-gold-600">{card.number}</p>
+                <h3 className="mt-2 text-xl font-bold text-navy-900">{card.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{card.body}</p>
               </article>
             ))}
           </div>
-        </div>
-        <aside className="space-y-5">
-          <div className="rounded-[2rem] bg-white p-7">
-            <div className="flex items-center gap-4">
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-navy-900 text-xl text-gold-400">
-                {initials(settings.directorName)}
-              </span>
-              <div>
-                <p className="text-2xl text-navy-900">{settings.directorName}</p>
-                <p className="font-bold text-gold-600">Director</p>
-              </div>
-            </div>
-            <dl className="mt-6 grid gap-3 text-sm">
-              <div className="flex justify-between gap-4 border-t border-navy-900/10 pt-3"><dt>Phone</dt><dd className="font-semibold">{settings.phone}</dd></div>
-              <div className="flex justify-between gap-4 border-t border-navy-900/10 pt-3"><dt>Email</dt><dd className="font-semibold">{settings.email}</dd></div>
-              <div className="flex justify-between gap-4 border-t border-navy-900/10 pt-3"><dt>Area</dt><dd className="text-right font-semibold">{settings.address}</dd></div>
-              <div className="flex justify-between gap-4 border-t border-navy-900/10 pt-3"><dt>Licence</dt><dd className="font-semibold">{settings.licenceNumber}</dd></div>
-              <div className="flex justify-between gap-4 border-t border-navy-900/10 pt-3"><dt>Cover</dt><dd className="font-semibold">{settings.insuredNote}</dd></div>
-            </dl>
+        </Container>
+      </section>
+
+      <section className="bg-surface-50 py-12 lg:py-14">
+        <Container>
+          <p className="eyebrow text-gold-600">{aboutProcess.eyebrow}</p>
+          <h2 className="mt-3 text-3xl font-semibold text-navy-900">{aboutProcess.title}</h2>
+          <ol className="mt-10 grid gap-8 md:grid-cols-3">
+            {aboutProcess.steps.map((step) => (
+              <li key={step.tag} className="border-t-2 border-gold-500 pt-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-gold-600">{step.tag}</p>
+                <h3 className="mt-2 text-xl font-bold text-navy-900">{step.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <section className="bg-white py-12 lg:py-14">
+        <Container className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-2xl border border-border shadow-md">
+            <FigmaImage
+              src={aboutImages.crew}
+              alt="Careful handling by the removals team"
+              width={1000}
+              height={900}
+              className="aspect-[10/11] w-full object-cover object-center"
+            />
           </div>
-          <img src="/brand/logo.jpg" alt="Fete Nexus logo" className="w-full rounded-[2rem] bg-white" />
-          <Link href="/brand/flyer.jpg" className="inline-flex font-bold text-navy-900">View the company profile</Link>
-        </aside>
-      </Container>
+          <div>
+            <p className="eyebrow text-gold-600">{aboutCommitment.eyebrow}</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-navy-900">{aboutCommitment.title}</h2>
+            <div className="mt-5 space-y-5 text-lg leading-8 text-muted">
+              {aboutCommitment.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+              ))}
+            </div>
+            <ul className="mt-8 space-y-2 text-sm font-semibold text-navy-800">
+              {aboutCommitment.serviceLines.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-forest-700 py-12 text-white lg:py-14">
+        <Container className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-2xl font-semibold leading-snug sm:text-3xl">{aboutBottomCta.title}</p>
+            <p className="mt-3 text-base leading-7 text-white/90">{aboutBottomCta.body}</p>
+          </div>
+          <Link
+            href={aboutBottomCta.href}
+            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-md bg-gold-500 px-6 text-sm font-bold text-white hover:bg-gold-400"
+          >
+            {aboutBottomCta.label}
+            <FiArrowRight aria-hidden />
+          </Link>
+        </Container>
+      </section>
     </>
   );
 }

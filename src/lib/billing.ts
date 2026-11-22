@@ -1,13 +1,15 @@
 import { prisma } from "@/lib/db";
 import { gbp } from "@/lib/format";
 
-export async function nextCode(prefix: "FN" | "INV") {
+export async function nextCode(prefix: "FN" | "INV" | "ENQ") {
   for (let attempt = 0; attempt < 6; attempt += 1) {
     const code = `${prefix}-${Math.floor(1000 + Math.random() * 9000)}`;
     const existing =
       prefix === "FN"
         ? await prisma.booking.findUnique({ where: { reference: code }, select: { id: true } })
-        : await prisma.invoice.findUnique({ where: { number: code }, select: { id: true } });
+        : prefix === "INV"
+          ? await prisma.invoice.findUnique({ where: { number: code }, select: { id: true } })
+          : await prisma.contactEnquiry.findUnique({ where: { reference: code }, select: { id: true } });
     if (!existing) return code;
   }
   return `${prefix}-${Date.now().toString().slice(-8)}`;

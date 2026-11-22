@@ -27,7 +27,7 @@ export function ServiceForm({
 }) {
   const [state, action, pending] = useActionState(saveService, {} as FormState);
   return (
-    <form action={action} className="grid max-w-3xl gap-4 rounded-[2rem] bg-white p-6">
+    <form action={action} className="grid max-w-3xl gap-4 panel p-6">
       {initial ? <input type="hidden" name="id" value={initial.id} /> : null}
       {state.error ? <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-800">{state.error}</p> : null}
       <label className="label">Title<input className="field" name="title" required defaultValue={initial?.title} /></label>
@@ -49,7 +49,7 @@ export function ServiceForm({
       <label className="flex items-center gap-2 font-semibold"><input type="checkbox" name="isPurchasable" defaultChecked={initial?.isPurchasable} /> Customers can buy this at the listed price</label>
       <label className="flex items-center gap-2 font-semibold"><input type="checkbox" name="featured" defaultChecked={initial?.featured} /> Show in top services</label>
       <label className="flex items-center gap-2 font-semibold"><input type="checkbox" name="active" defaultChecked={initial?.active ?? true} /> Visible on the site</label>
-      <button disabled={pending} className="mt-2 inline-flex min-h-11 items-center justify-center rounded-full bg-navy-900 px-5 font-bold text-white">{initial ? "Save service" : "Create service"}</button>
+      <button disabled={pending} className="mt-2 btn-secondary">{initial ? "Save service" : "Create service"}</button>
     </form>
   );
 }

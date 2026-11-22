@@ -18,6 +18,8 @@ function refreshBooking(id: string) {
   revalidatePath(`/admin/bookings/${id}`);
   revalidatePath("/account");
   revalidatePath(`/account/bookings/${id}`);
+  revalidatePath(`/account/bookings/${id}/quote`);
+  revalidatePath(`/account/bookings/${id}/confirmation`);
   revalidatePath("/admin/payments");
 }
 

@@ -19,7 +19,7 @@ export function PaymentConfigForm({
 }) {
   const [state, action, pending] = useActionState(savePaymentConfig, {} as FormState);
   return (
-    <form action={action} className="grid max-w-3xl gap-4 rounded-[2rem] bg-white p-6">
+    <form action={action} className="grid max-w-3xl gap-4 panel p-6">
       <p className="text-sm text-muted">
         {enabled
           ? "Card deposits are on. A customer can pay the amount on their invoice."
@@ -53,7 +53,7 @@ export function PaymentConfigForm({
         <input type="checkbox" name="clear" value="yes" className="size-4" />
         Remove the saved card credentials
       </label>
-      <button disabled={pending} className="inline-flex min-h-11 items-center justify-center rounded-full bg-navy-900 px-5 font-bold text-white">
+      <button disabled={pending} className="btn-secondary">
         {pending ? "Saving…" : "Save payment config"}
       </button>
     </form>

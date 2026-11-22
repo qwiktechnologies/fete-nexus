@@ -19,10 +19,10 @@ export default async function BlogAdminPage() {
     <div className="w-full">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl text-navy-900">Community</h1>
+          <h1 className="dash-title">Community</h1>
           <p className="mt-2 text-muted">Journal articles shown on the public site.</p>
         </div>
-        <Link href="/admin/blog/new" className="rounded-full bg-gold-500 px-5 py-2 font-bold text-navy-950">New article</Link>
+        <Link href="/admin/blog/new" className="btn-primary py-2">New article</Link>
       </div>
       <DataTable columns={columns} empty={!posts.length}>
         {posts.map((post) => (

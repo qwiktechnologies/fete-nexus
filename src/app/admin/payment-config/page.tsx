@@ -10,7 +10,7 @@ export default async function PaymentConfigPage() {
   const proto = headerList.get("x-forwarded-proto") ?? "http";
   return (
     <div>
-      <h1 className="mb-2 text-4xl text-navy-900">Payment config</h1>
+      <h1 className="mb-2 dash-title">Payment config</h1>
       <p className="mb-6 max-w-3xl text-muted">
         Paste the Stripe keys here. They are stored with the site settings, and they are not read from an environment file.
       </p>

@@ -1,20 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #071422;
-  --color-navy-900: #0b1f3a;
-  --color-navy-800: #123056;
-  --color-navy-700: #1b406f;
-  --color-navy-100: #e7eef6;
-  --color-gold-600: #c48e0c;
-  --color-gold-500: #e6a817;
-  --color-gold-400: #f0be3a;
-  --color-gold-100: #fbf3dc;
-  --color-paper: #f6f3ec;
-  --color-ink: #142033;
-  --color-muted: #5c6b7a;
-  --font-sans: var(--font-source), "Segoe UI", sans-serif;
-  --font-display: var(--font-outfit), Georgia, sans-serif;
+  --color-navy-950: #0f2744;
+  --color-navy-900: #12355b;
+  --color-navy-800: #1b4369;
+  --color-navy-700: #24527d;
+  --color-navy-100: #dfe6ee;
+  --color-gold-600: #df7a16;
+  --color-gold-500: #f28c28;
+  --color-gold-400: #f5a84f;
+  --color-gold-100: #fdebd3;
+  --color-forest-700: #1f6b3f;
+  --color-forest-600: #248a4d;
+  --color-surface-50: #f3f6fa;
+  --color-surface-100: #e8eef5;
+  --color-paper: #f3f6fa;
+  --color-ink: #1b2430;
+  --color-muted: #4a5767;
+  --color-border: #c5cfdb;
+  --font-sans: var(--font-poppins), var(--font-source), "Segoe UI", sans-serif;
+  --font-display: var(--font-poppins), var(--font-outfit), Georgia, sans-serif;
 }
 
 :root {
@@ -47,20 +52,139 @@ h4 {
 }
 
 ::selection {
-  background: #f0be3a;
-  color: #0b1f3a;
+  background: #f28c28;
+  color: #12355b;
 }
 
 :focus-visible {
-  outline: 2px solid #e6a817;
+  outline: 2px solid #f28c28;
   outline-offset: 3px;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.panel {
+  border-radius: 1rem;
+  border: 1px solid rgb(197 207 219 / 65%);
+  background: white;
+  box-shadow: 0 24px 48px -40px rgb(18 53 91 / 55%);
+}
+
+.dash-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-family: var(--font-outfit), Georgia, sans-serif;
+  letter-spacing: -0.03em;
+  color: var(--color-navy-900);
+}
+
+.btn-primary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+  background: var(--color-gold-500);
+  padding: 0 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 10px 24px -12px rgb(242 140 40 / 90%);
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-gold-400);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-navy-800);
+  background: var(--color-navy-800);
+  padding: 0 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+  transition: background 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-navy-700);
+}
+
+.btn-outline {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(197 207 219 / 90%);
+  background: white;
+  padding: 0 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+}
+
+.btn-outline:hover {
+  background: var(--color-surface-100);
+}
+
+.btn-success {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-forest-700);
+  background: var(--color-forest-700);
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+}
+
+.btn-danger {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid #9b1c1c;
+  background: white;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #9b1c1c;
+}
+
+.dash-cta {
+  border-radius: 1rem;
+  border: 1px solid rgb(197 207 219 / 40%);
+  background: var(--color-navy-900);
+  color: white;
 }
 
 .field {
   margin-top: 0.45rem;
   width: 100%;
-  border-radius: 0.9rem;
-  border: 1px solid rgb(11 31 58 / 12%);
+  border-radius: 0.5rem;
+  border: 1px solid rgb(197 207 219 / 90%);
   background: white;
   padding: 0.8rem 0.95rem;
   color: var(--color-ink);

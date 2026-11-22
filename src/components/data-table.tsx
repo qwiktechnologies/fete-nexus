@@ -10,7 +10,7 @@ export function DataTable({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mt-6 w-full overflow-x-auto rounded-[1.5rem] border border-navy-900/10 bg-white">
+    <div className="panel mt-6 w-full overflow-x-auto p-0">
       <table className="data-table min-w-full">
         <thead>
           <tr>

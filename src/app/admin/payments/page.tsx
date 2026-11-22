@@ -95,7 +95,7 @@ export default async function PaymentsPage() {
     <div className="w-full">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-4xl text-navy-900">Payments</h1>
+          <h1 className="dash-title">Invoices</h1>
           <p className="mt-2 text-muted">Card payments, bank deposits and invoices still waiting.</p>
         </div>
         {isAdminRole(user.role) ? (

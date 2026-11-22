@@ -7,6 +7,8 @@ import { MessageThread } from "@/components/message-thread";
 import { StatusBadge } from "@/components/status-badge";
 import type { BookingDetail } from "@/lib/queries";
 import { gbp, formatWhen } from "@/lib/format";
+import { isConfirmationReady } from "@/lib/booking-confirmation";
+import { isQuotePageReady } from "@/lib/booking-quote";
 import { bookingTypeLabel, invoiceStatusLabel } from "@/lib/labels";
 
 export function BookingView({
@@ -27,12 +29,31 @@ export function BookingView({
   const invoice = booking.invoices.find((item) => item.status === "SENT" || item.status === "PAID");
   const quote = booking.quotes[0];
 
+  const showQuote = mode === "customer" && isQuotePageReady(booking);
+  const showConfirmation = mode === "customer" && isConfirmationReady(booking);
+
   return (
     <div className="grid gap-6">
+      {showQuote ? (
+        <Link
+          href={`/account/bookings/${booking.id}/quote`}
+          className="inline-flex min-h-11 items-center justify-center rounded-md bg-gold-500 px-5 text-sm font-bold text-white hover:bg-gold-400"
+        >
+          View quote &amp; pay deposit
+        </Link>
+      ) : null}
+      {showConfirmation ? (
+        <Link
+          href={`/account/bookings/${booking.id}/confirmation`}
+          className="inline-flex min-h-11 items-center justify-center rounded-md bg-forest-700 px-5 text-sm font-bold text-white hover:bg-forest-600"
+        >
+          View booking confirmation
+        </Link>
+      ) : null}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-sm font-bold text-gold-600">{booking.reference}</p>
-          <h1 className="text-4xl text-navy-900">{booking.service?.title ?? bookingTypeLabel[booking.type]}</h1>
+          <h1 className="dash-title">{booking.service?.title ?? bookingTypeLabel[booking.type]}</h1>
         </div>
         <StatusBadge status={booking.status} />
       </div>
@@ -42,7 +63,7 @@ export function BookingView({
           <h2 className="text-2xl">Payment received</h2>
           <p className="mt-2">The deposit is in. Download your receipt and booking slip.</p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <a href={`/account/bookings/${booking.id}/receipt`} className="inline-flex min-h-11 items-center rounded-full bg-navy-900 px-5 font-bold text-white">Download receipt</a>
+            <a href={`/account/bookings/${booking.id}/receipt`} className="btn-secondary">Download receipt</a>
             <a href={`/account/bookings/${booking.id}/slip`} className="inline-flex min-h-11 items-center rounded-full border border-navy-900/15 px-5 font-bold">Download booking slip</a>
           </div>
         </section>
@@ -57,7 +78,7 @@ export function BookingView({
         <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800">Payment was cancelled. The invoice is still here when you are ready.</p>
       ) : null}
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <section className="rounded-[2rem] bg-white p-6">
+        <section className="panel p-6">
           <h2 className="text-2xl text-navy-900">Job details</h2>
           {mode === "staff" ? (
             <p className="mt-2 text-sm text-muted">{booking.user.name} · {booking.user.email} · {booking.user.phone ?? "No phone"}</p>
@@ -95,7 +116,7 @@ export function BookingView({
             </section>
           ) : null}
           {invoice ? (
-            <section className="rounded-[2rem] bg-navy-900 p-6 text-white">
+            <section className="dash-cta p-6">
               <p className="text-sm uppercase tracking-[0.16em] text-gold-400">{invoice.number} · {invoiceStatusLabel[invoice.status]}</p>
               <p className="mt-3 text-sm text-white/70">Full amount {gbp(invoice.amountPence)}</p>
               <p className="mt-1 text-4xl">{gbp(invoice.depositPence)} deposit</p>
@@ -105,7 +126,7 @@ export function BookingView({
                   {cardPayments ? (
                     <form action={startCheckout}>
                       <input type="hidden" name="invoiceId" value={invoice.id} />
-                      <button className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-gold-500 font-bold text-navy-950">
+                      <button type="submit" className="btn-primary min-h-12 w-full">
                         Pay now
                       </button>
                       <p className="mt-3 text-center text-sm text-white/70">You will complete the card payment on Stripe.</p>
@@ -130,7 +151,7 @@ export function BookingView({
               {invoice.status === "SENT" && mode === "staff" ? (
                 <form action={markDepositPaid} className="mt-5">
                   <input type="hidden" name="invoiceId" value={invoice.id} />
-                  <button className="inline-flex min-h-11 items-center rounded-full bg-gold-500 px-5 font-bold text-navy-950">
+                  <button type="submit" className="btn-primary">
                     Mark deposit received
                   </button>
                 </form>

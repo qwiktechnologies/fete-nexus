@@ -15,6 +15,17 @@ export function formatWhen(date: Date, time: string) {
   return `${formatDate(date)} at ${time}`;
 }
 
+export function formatArrivalSchedule(date: Date, time: string) {
+  const day = new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/London",
+  }).format(date);
+  return `${day}   /   ${time} arrival`;
+}
+
 export function formatStamp(date: Date) {
   return new Intl.DateTimeFormat("en-GB", {
     day: "numeric",

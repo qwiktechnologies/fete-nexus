@@ -48,6 +48,13 @@ enum PaymentStatus {
   REFUNDED
 }
 
+enum EnquiryStatus {
+  NEW
+  READ
+  REPLIED
+  ARCHIVED
+}
+
 model User {
   id           String   @id @default(cuid())
   name         String
@@ -236,4 +243,24 @@ model PaymentConfig {
   stripePublishableKey String   @default("")
   stripeWebhookSecret  String   @default("")
   updatedAt            DateTime @updatedAt
+}
+
+model ContactEnquiry {
+  id                 String        @id @default(cuid())
+  reference          String        @unique
+  fullName           String
+  email              String
+  phone              String        @default("")
+  serviceRequired    String
+  collectionPostcode String        @default("")
+  deliveryPostcode   String        @default("")
+  message            String        @db.Text
+  status             EnquiryStatus @default(NEW)
+  adminNote          String        @default("") @db.Text
+  readAt             DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
 }

@@ -13,40 +13,59 @@ export default async function AccountHome() {
     prisma.message.count({ where: { readAt: null, conversation: { userId: user.id }, NOT: { senderId: user.id } } }),
   ]);
 
+  const firstName = user.name.split(" ")[0];
+
   return (
-    <div className="grid gap-6">
-      <div>
-        <h1 className="text-4xl text-navy-900">Hello, {user.name.split(" ")[0]}</h1>
-        <p className="mt-2 text-muted">{unread ? `${unread} unread message${unread === 1 ? "" : "s"}` : "You're up to date."}</p>
-      </div>
+    <div className="max-w-6xl grid gap-6">
+      <header>
+        <p className="eyebrow text-gold-600">Your account</p>
+        <h1 className="dash-title mt-2">Hello, {firstName}</h1>
+        <p className="mt-3 text-muted">
+          {unread ? `${unread} unread message${unread === 1 ? "" : "s"}` : "You're up to date."} Track bookings, pay deposits and message dispatch.
+        </p>
+      </header>
       {invoices.length ? (
-        <section className="rounded-[2rem] bg-navy-900 p-6 text-white">
-          <h2 className="text-2xl">Deposit due</h2>
+        <section className="dash-cta p-6">
+          <h2 className="text-xl font-semibold text-white">Deposit due</h2>
           <ul className="mt-4 grid gap-3">
             {invoices.map((invoice) => (
-              <li key={invoice.id} className="flex flex-wrap items-center justify-between gap-3">
-                <span>{invoice.booking.reference} · {gbp(invoice.depositPence)}</span>
-                <Link href={`/account/bookings/${invoice.bookingId}`} className="rounded-full bg-gold-500 px-4 py-2 text-sm font-bold text-navy-950">Pay</Link>
+              <li key={invoice.id} className="flex flex-wrap items-center justify-between gap-3 text-white">
+                <span>
+                  {invoice.booking.reference} · {gbp(invoice.depositPence)}
+                </span>
+                <Link href={`/account/bookings/${invoice.bookingId}`} className="btn-primary px-4 py-2 text-sm">
+                  Pay
+                </Link>
               </li>
             ))}
           </ul>
         </section>
       ) : null}
-      <section className="rounded-[2rem] bg-white p-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl text-navy-900">Recent bookings</h2>
-          <Link href="/book" className="font-bold text-navy-900">Book now</Link>
+      <section className="panel p-6">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-xl font-semibold text-navy-900">Recent bookings</h2>
+          <Link href="/book" className="text-sm font-bold text-gold-600">
+            Book now
+          </Link>
         </div>
-        <ul className="mt-4 divide-y divide-navy-900/10">
-          {bookings.length ? bookings.map((booking) => (
-            <li key={booking.id} className="flex flex-wrap items-center justify-between gap-3 py-4">
-              <div>
-                <Link href={`/account/bookings/${booking.id}`} className="font-bold text-navy-900">{booking.reference}</Link>
-                <p className="text-sm text-muted">{booking.service?.title ?? "Custom job"} · {formatWhen(booking.scheduledDate, booking.scheduledTime)}</p>
-              </div>
-              <StatusBadge status={booking.status} />
-            </li>
-          )) : <li className="py-6 text-muted">No bookings yet.</li>}
+        <ul className="mt-4 divide-y divide-border">
+          {bookings.length ? (
+            bookings.map((booking) => (
+              <li key={booking.id} className="flex flex-wrap items-center justify-between gap-3 py-4">
+                <div>
+                  <Link href={`/account/bookings/${booking.id}`} className="font-bold text-navy-900">
+                    {booking.reference}
+                  </Link>
+                  <p className="text-sm text-muted">
+                    {booking.service?.title ?? "Custom job"} · {formatWhen(booking.scheduledDate, booking.scheduledTime)}
+                  </p>
+                </div>
+                <StatusBadge status={booking.status} />
+              </li>
+            ))
+          ) : (
+            <li className="py-6 text-muted">No bookings yet.</li>
+          )}
         </ul>
       </section>
       <PasswordForm />

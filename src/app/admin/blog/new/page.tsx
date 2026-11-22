@@ -5,7 +5,7 @@ export default async function NewPostPage() {
   await requireAdmin();
   return (
     <div>
-      <h1 className="mb-6 text-4xl text-navy-900">New article</h1>
+      <h1 className="mb-6 dash-title">New article</h1>
       <PostForm />
     </div>
   );

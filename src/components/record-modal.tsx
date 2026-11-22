@@ -33,7 +33,7 @@ export function RecordModal({
             role="dialog"
             aria-modal="true"
             aria-labelledby="record-title"
-            className="max-h-[86vh] w-full max-w-2xl overflow-auto rounded-[1.75rem] bg-white p-6 shadow-2xl"
+            className="panel max-h-[86vh] w-full max-w-2xl overflow-auto p-6 shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4">

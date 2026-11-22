@@ -18,11 +18,11 @@ export default async function ServicesPage({
 
   return (
     <>
-      <section className="bg-navy-900 py-16 text-white">
+      <section className="bg-navy-900 py-14 text-white">
         <Container>
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold-400">Our services</p>
-          <h1 className="mt-3 text-5xl">Move it, clear it, or deliver it</h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/75">
+          <p className="eyebrow text-gold-400">Our services</p>
+          <h1 className="mt-3 text-4xl sm:text-5xl">Move it, clear it, or deliver it</h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/80">
             Fixed-price jobs can be booked and paid from the service page. Larger moves are quoted from your photographs and addresses.
           </p>
         </Container>
@@ -36,7 +36,7 @@ export default async function ServicesPage({
               <Link
                 key={item}
                 href={href}
-                className={`rounded-full px-4 py-2 text-sm font-bold ${active ? "bg-navy-900 text-white" : "bg-white text-navy-900"}`}
+                className={`rounded-md px-4 py-2 text-sm font-bold ${active ? "bg-navy-900 text-white" : "border border-border bg-white text-navy-900"}`}
               >
                 {item}
               </Link>

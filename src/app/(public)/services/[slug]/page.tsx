@@ -34,7 +34,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-navy-900 text-gold-400">
             <ServiceIcon name={service.icon} />
           </span>
-          <h1 className="text-4xl text-navy-900 sm:text-5xl">{service.title}</h1>
+          <h1 className="dash-title">{service.title}</h1>
         </div>
         <p className="mt-6 text-xl text-muted">{service.summary}</p>
         {service.description.split(/\n\n+/).map((paragraph) => (

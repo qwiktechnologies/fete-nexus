@@ -147,7 +147,7 @@ export async function createBooking(_prev: FormState, formData: FormData): Promi
   revalidatePath("/admin/bookings");
   revalidatePath("/account");
   const invoice = await prisma.invoice.findFirst({ where: { bookingId, status: "SENT" }, select: { id: true } });
-  redirect(invoice ? `/account/bookings/${bookingId}?invoice=1` : `/account/bookings/${bookingId}`);
+  redirect(invoice ? `/account/bookings/${bookingId}/quote?invoice=1` : `/account/bookings/${bookingId}`);
 }
 
 export async function cancelBooking(formData: FormData) {

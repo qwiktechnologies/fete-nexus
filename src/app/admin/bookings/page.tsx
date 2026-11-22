@@ -39,7 +39,7 @@ export default async function AdminBookingsPage({
 
   return (
     <div className="w-full">
-      <h1 className="text-4xl text-navy-900">Bookings</h1>
+      <h1 className="dash-title">Bookings</h1>
       <p className="mt-2 text-muted">Every request, with the job, the addresses and the status.</p>
       <form className="mt-6 flex flex-wrap items-center gap-3">
         <input className="field mt-0 max-w-sm" name="q" defaultValue={query} placeholder="Reference, name or address" />
@@ -49,7 +49,7 @@ export default async function AdminBookingsPage({
             <option key={item} value={item}>{bookingStatusLabel[item]}</option>
           ))}
         </select>
-        <button className="inline-flex min-h-11 items-center rounded-full bg-navy-900 px-5 font-bold text-white">Filter</button>
+        <button className="btn-secondary">Filter</button>
       </form>
       <DataTable columns={columns} empty={!bookings.length}>
         {bookings.map((booking) => (

@@ -14,8 +14,8 @@ export default async function AccountMessagesPage() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <section>
-        <h1 className="text-4xl text-navy-900">Messages</h1>
-        <ul className="mt-6 divide-y divide-navy-900/10 rounded-[2rem] bg-white px-6">
+        <h1 className="dash-title">Messages</h1>
+        <ul className="mt-6 divide-y divide-border panel px-6">
           {conversations.map((conversation) => (
             <li key={conversation.id} className="py-5">
               <Link href={`/account/messages/${conversation.id}`} className="font-bold text-navy-900">{conversation.subject}</Link>

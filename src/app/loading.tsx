@@ -1,3 +1,9 @@
+import { Container } from "@/components/container";
+
 export default function Loading() {
-  return <div className="px-6 py-24 text-center text-sm font-bold tracking-wide text-navy-800">Loading…</div>;
+  return (
+    <Container className="py-24 text-center">
+      <p className="text-sm font-bold uppercase tracking-wide text-navy-800">Loading…</p>
+    </Container>
+  );
 }

@@ -4,24 +4,24 @@ import { BookingForm } from "@/components/booking-form";
 import { getCurrentUser } from "@/lib/guards";
 import { activeServices, getSettings } from "@/lib/queries";
 
-export const metadata: Metadata = { title: "Book now" };
+export const metadata: Metadata = { title: "Request a booking" };
 
 export default async function BookPage({
   searchParams,
 }: {
-  searchParams: Promise<{ service?: string }>;
+  searchParams: Promise<{ service?: string; from?: string; to?: string }>;
 }) {
-  const { service } = await searchParams;
+  const { service, from, to } = await searchParams;
   const [services, user, settings] = await Promise.all([activeServices(), getCurrentUser(), getSettings()]);
   return (
     <>
-      <section className="bg-navy-900 py-14 text-white">
+      <section className="border-b border-border/80 bg-surface-50 py-12">
         <Container>
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-gold-400">Book now</p>
-          <h1 className="mt-3 text-5xl">Tell us what needs doing</h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/75">
-            Removal, collection, house move, delivery, or one of the listed services. We answer in your account.
+          <h1 className="dash-title">Request a Booking</h1>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
+            Removal, collection, house move, delivery, or one of the listed services. We reply in your account with a quote or invoice.
           </p>
+          <p className="mt-2 text-sm text-muted">Pay the deposit on the invoice to hold the date. {settings.insuredNote}</p>
         </Container>
       </section>
       <Container className="py-12">
@@ -38,6 +38,8 @@ export default async function BookPage({
           user={user ? { name: user.name, email: user.email, phone: user.phone } : null}
           initialSlug={service}
           defaultDeposit={settings.depositPercent}
+          prefilledFrom={from}
+          prefilledTo={to}
         />
       </Container>
     </>

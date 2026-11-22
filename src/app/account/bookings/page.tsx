@@ -14,8 +14,8 @@ export default async function AccountBookingsPage() {
   });
   return (
     <div>
-      <h1 className="text-4xl text-navy-900">Bookings</h1>
-      <ul className="mt-6 divide-y divide-navy-900/10 rounded-[2rem] bg-white px-6">
+      <h1 className="dash-title">Bookings</h1>
+      <ul className="mt-6 divide-y divide-border panel px-6">
         {bookings.map((booking) => (
           <li key={booking.id} className="flex flex-wrap items-center justify-between gap-3 py-5">
             <div>
