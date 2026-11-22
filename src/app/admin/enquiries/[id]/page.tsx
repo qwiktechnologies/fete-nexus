@@ -24,7 +24,7 @@ export default async function AdminEnquiryDetailPage({ params }: { params: Promi
       <Link href="/admin/enquiries" className="text-sm font-bold text-gold-600">
         All enquiries
       </Link>
-      <motionlessHeader reference={enquiry.reference} status={enquiry.status} createdAt={enquiry.createdAt} />
+      <EnquiryPageHeader reference={enquiry.reference} status={enquiry.status} createdAt={enquiry.createdAt} />
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <section className="panel p-6">
@@ -66,7 +66,7 @@ export default async function AdminEnquiryDetailPage({ params }: { params: Promi
   );
 }
 
-function motionlessHeader({
+function EnquiryPageHeader({
   reference,
   status,
   createdAt,

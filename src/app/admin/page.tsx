@@ -62,7 +62,7 @@ export default async function AdminHome() {
         </p>
       </header>
 
-      <motionlessStatGrid stats={stats} />
+      <AdminStatGrid stats={stats} />
 
       <section className="mt-8">
         <h2 className="text-sm font-bold uppercase tracking-[0.12em] text-muted">{adminOverviewCopy.quickActions}</h2>
@@ -159,12 +159,12 @@ export default async function AdminHome() {
         </section>
       </div>
 
-      <motionlessInboxRow unread={unread} enquiries={newEnquiries} />
+      <AdminInboxShortcuts unread={unread} enquiries={newEnquiries} />
     </div>
   );
 }
 
-function motionlessStatGrid({
+function AdminStatGrid({
   stats,
 }: {
   stats: { label: string; hint: string; value: string; href: string }[];
@@ -182,7 +182,7 @@ function motionlessStatGrid({
   );
 }
 
-function motionlessInboxRow({ unread, enquiries }: { unread: number; enquiries: number }) {
+function AdminInboxShortcuts({ unread, enquiries }: { unread: number; enquiries: number }) {
   if (unread === 0 && enquiries === 0) return null;
   return (
     <div className="mt-6 flex flex-wrap gap-3">

@@ -83,7 +83,7 @@ export default async function ContactPage() {
               </p>
             </div>
 
-            <motionlessTip />
+            <ContactBookingTip />
           </div>
 
           <ContactEnquiryForm serviceOptions={serviceOptions} />
@@ -147,7 +147,7 @@ export default async function ContactPage() {
   );
 }
 
-function motionlessTip() {
+function ContactBookingTip() {
   return (
     <div className="rounded-xl border border-gold-200 bg-gold-50/80 p-5">
       <p className="font-bold text-navy-900">{contactDispatch.bookingTipTitle}</p>
