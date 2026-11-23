@@ -23,6 +23,19 @@ function refreshBooking(id: string) {
   revalidatePath("/admin/payments");
 }
 
+export async function deleteBooking(formData: FormData) {
+  await requireAdmin();
+  const id = field(formData, "id");
+  const confirm = field(formData, "confirm");
+  const booking = await prisma.booking.findUnique({ where: { id }, select: { reference: true } });
+  if (!booking) redirect("/admin/bookings");
+  if (confirm !== booking.reference) redirect(`/admin/bookings/${id}`);
+  await prisma.booking.delete({ where: { id } });
+  revalidatePath("/admin");
+  revalidatePath("/admin/bookings");
+  redirect("/admin/bookings");
+}
+
 export async function setBookingStatus(_prev: FormState, formData: FormData): Promise<FormState> {
   const staff = await requireStaff();
   const id = field(formData, "id");

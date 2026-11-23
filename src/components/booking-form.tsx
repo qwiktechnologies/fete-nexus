@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 import { createBooking } from "@/actions/booking";
 import { MarketingSubmitButton } from "@/components/marketing-button";
+import { PasswordField } from "@/components/password-field";
 import { gbp } from "@/lib/format";
 import type { FormState } from "@/lib/validators";
 
@@ -185,10 +186,8 @@ export function BookingForm({
                   Email
                   <input className="field" type="email" name="email" required autoComplete="email" />
                 </label>
-                <label className="label">
-                  Password
-                  <input className="field" type="password" name="password" required minLength={8} autoComplete="new-password" />
-                </label>
+                <PasswordField label="Password" name="password" required minLength={8} autoComplete="new-password" />
+                <PasswordField label="Confirm password" name="confirmPassword" required minLength={8} autoComplete="new-password" />
               </div>
             </fieldset>
           )}

@@ -8,10 +8,21 @@ const allowed = new Map([
 ]);
 
 export async function saveJobPhotos(files: File[]) {
+  if (!files.length) return { urls: [] as string[] };
   if (files.length > 6) return { error: "You can add up to 6 photographs." as const, urls: [] as string[] };
+  if (process.env.VERCEL) {
+    return {
+      error: "Photo upload is not available on this host yet. Submit without photos or call the office." as const,
+      urls: [] as string[],
+    };
+  }
   const urls: string[] = [];
   const directory = path.join(process.cwd(), "public", "uploads");
-  await mkdir(directory, { recursive: true });
+  try {
+    await mkdir(directory, { recursive: true });
+  } catch {
+    return { error: "We couldn't save photographs. Try again without photos." as const, urls };
+  }
 
   for (const file of files) {
     const extension = allowed.get(file.type);

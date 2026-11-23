@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FiLock, FiMessageSquare, FiTruck } from "react-icons/fi";
 import { login, register } from "@/actions/auth";
 import { Container } from "@/components/container";
+import { PasswordField } from "@/components/password-field";
 import { Wordmark } from "@/components/logo";
 import type { FormState } from "@/lib/validators";
 
@@ -80,17 +81,22 @@ export function AuthForm({ mode, next }: { mode: "login" | "register"; next?: st
                 Email
                 <input className="field" type="email" name="email" required autoComplete="email" />
               </label>
-              <label className="label">
-                Password
-                <input
-                  className="field"
-                  type="password"
-                  name="password"
+              <PasswordField
+                label="Password"
+                name="password"
+                required
+                minLength={mode === "register" ? 8 : undefined}
+                autoComplete={mode === "login" ? "current-password" : "new-password"}
+              />
+              {mode === "register" ? (
+                <PasswordField
+                  label="Confirm password"
+                  name="confirmPassword"
                   required
-                  minLength={mode === "register" ? 8 : undefined}
-                  autoComplete={mode === "login" ? "current-password" : "new-password"}
+                  minLength={8}
+                  autoComplete="new-password"
                 />
-              </label>
+              ) : null}
             </div>
             <button type="submit" disabled={pending} className="btn-primary mt-6 w-full">
               {pending ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}

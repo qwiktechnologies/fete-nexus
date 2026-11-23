@@ -28,11 +28,13 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
   const email = field(formData, "email").toLowerCase();
   const phone = field(formData, "phone");
   const password = field(formData, "password");
+  const confirmPassword = field(formData, "confirmPassword");
   if (name.length < 2) return { error: "Enter your name." };
   const parsedEmail = emailSchema.safeParse(email);
   if (!parsedEmail.success) return { error: "Enter a valid email address." };
   const parsedPassword = passwordSchema.safeParse(password);
   if (!parsedPassword.success) return { error: parsedPassword.error.issues[0]?.message ?? "Check the password." };
+  if (password !== confirmPassword) return { error: "Passwords don't match." };
   if (phone.length < 7) return { error: "Enter a phone number we can reach you on." };
 
   const existing = await prisma.user.findUnique({ where: { email } });

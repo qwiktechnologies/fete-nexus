@@ -43,11 +43,15 @@ export default async function ServicesPage({
             );
           })}
         </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {visible.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
+        {!visible.length ? (
+          <p className="mt-8 text-muted">No services match this category. Try All or contact us for a custom quote.</p>
+        ) : (
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {visible.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        )}
       </Container>
     </>
   );

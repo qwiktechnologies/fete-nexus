@@ -75,6 +75,10 @@ export const homeTopServices = {
       title: "Rubbish & Unwanted Items",
       summary: "Help removing rubbish, unwanted furniture and other items.",
     },
+    {
+      title: "Same-Day Delivery & Collection",
+      summary: "When the job cannot wait until tomorrow — local same-day van when the diary allows.",
+    },
   ],
 } as const;
 

@@ -50,6 +50,7 @@ export async function createBooking(_prev: FormState, formData: FormData): Promi
     const email = field(formData, "email").toLowerCase();
     const phone = field(formData, "phone");
     const password = field(formData, "password");
+    const confirmPassword = field(formData, "confirmPassword");
     if (name.length < 2) return { error: "Enter your name." };
     if (!emailSchema.safeParse(email).success) return { error: "Enter a valid email address." };
     if (phone.length < 7) return { error: "Enter a phone number." };
@@ -64,6 +65,7 @@ export async function createBooking(_prev: FormState, formData: FormData): Promi
       if (!passwordSchema.safeParse(password).success) {
         return { error: "Create a password of at least 8 characters so you can track this booking." };
       }
+      if (password !== confirmPassword) return { error: "Passwords don't match." };
       const created = await prisma.user.create({
         data: { name, email, phone, passwordHash: await bcrypt.hash(password, 10), role: "CUSTOMER" },
       });

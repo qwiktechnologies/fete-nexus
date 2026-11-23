@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdminBookingDelete } from "@/components/admin-booking-delete";
 import { AdminBookingDecisionPanel } from "@/components/admin-booking-decision-panel";
 import { MessageThread } from "@/components/message-thread";
 import { StatusBadge } from "@/components/status-badge";
@@ -27,9 +28,11 @@ function buildActivity(booking: BookingDetail) {
 export function AdminBookingDetail({
   booking,
   viewerId,
+  canDelete,
 }: {
   booking: BookingDetail;
   viewerId: string;
+  canDelete?: boolean;
 }) {
   const serviceLabel = booking.service?.title ?? bookingTypeLabel[booking.type];
   const openInvoice = booking.invoices.find((item) => item.status === "SENT");
@@ -99,6 +102,8 @@ export function AdminBookingDetail({
           </ul>
         </section>
       </div>
+
+      {canDelete ? <AdminBookingDelete bookingId={booking.id} reference={booking.reference} /> : null}
 
       {booking.conversation ? (
         <section className="panel p-6">

@@ -258,6 +258,8 @@ async function main() {
   const paymentConfig = await prisma.paymentConfig.findUnique({ where: { id: "default" } });
   if (!paymentConfig) await prisma.paymentConfig.create({ data: { id: "default" } });
 
+  const companyAddress = "1, Sherborne Road, Bradford. BD7 1RB";
+
   const settings = await prisma.siteSetting.findUnique({ where: { id: "default" } });
   if (!settings) {
     await prisma.siteSetting.create({
@@ -268,7 +270,7 @@ async function main() {
         tagline: "Your Logistics Partner",
         email: "contact@fetenexus.co.uk",
         phone: "07920 507601",
-        address: "Bradford, Leeds and West Yorkshire",
+        address: companyAddress,
         areas: "Bradford | Leeds | West Yorkshire",
         directorName: "Lucky Osaigbovo",
         licenceNumber: "CBDU663154",
@@ -279,11 +281,20 @@ async function main() {
           "Fete Nexus Logistics & Removals is a West Yorkshire company for people who need something moved, delivered or cleared without chasing a driver. We work across Bradford, Leeds and the surrounding towns.\n\nLucky Osaigbovo started the company to be the crew he wanted to hire: insured, licensed to carry waste, and clear about the price before the van is booked. House moves, office relocations, end-of-tenancy cleaning, shop deliveries and full property clearances sit in one place.\n\nYou book on the site, we reply in your account, and the date is held once the deposit on your invoice is paid.",
       },
     });
+  } else {
+    await prisma.siteSetting.update({
+      where: { id: "default" },
+      data: { address: companyAddress },
+    });
   }
 
   for (const service of services) {
-    const found = await prisma.service.findUnique({ where: { slug: service.slug } });
-    if (!found) await prisma.service.create({ data: service });
+    const { slug, ...rest } = service;
+    await prisma.service.upsert({
+      where: { slug },
+      create: service,
+      update: rest,
+    });
   }
 
   for (const post of posts) {
